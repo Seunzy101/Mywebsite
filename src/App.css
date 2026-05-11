@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: #0d1b2a;
+  color: white;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-btn {
+  background: #343de2;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+
+/* Hero */
+.hero {
+  height: 90vh;
+  background: url("https://source.unsplash.com/1600x900/?mountain,travel") center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  text-align: center;
+  color: white;
+}
+
+.hero span {
+  color: #ffc300;
+}
+
+/* Booking Box */
+.booking-box {
+  background: white;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.tabs button {
+  margin-right: 10px;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.search-btn {
+  background: #ffc300;
+  border: none;
+  padding: 10px;
+}
+
+/* Services */
+.services {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+}
+
+.service-card {
+  text-align: center;
+}
+
+/* Destinations */
+.destinations {
+  padding: 40px;
+}
+
+.grid {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.image {
+  height: 150px;
+  background: #ccc;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 40px;
+  text-align: center;
+}
+
+/* Footer */
+.footer {
+  background: #0d1b2a;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
