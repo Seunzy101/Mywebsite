@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Bookingbox from "./components/Bookingbox";
+import BookingBox from "./components/BookingBox";
 import Services from "./components/Services";
 import Destinations from "./components/Destinations";
 import Testimonials from "./components/Testimonials";
