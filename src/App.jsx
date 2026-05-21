@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import BookingBox from "./components/BookingBox";
+import BookingBox from "./components/BookingBox.jsx";
 import Services from "./components/Services";
 import Destinations from "./components/Destinations";
 import Testimonials from "./components/Testimonials";
@@ -18,7 +18,7 @@ function Home() {
   return (
     <div className="bg-gray-50">
       <Hero />
-      <Bookingbox />
+      <BookingBox />
       <Services />
       <Destinations />
       <WhyChoose />
