@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   FaCheckCircle,
   FaShieldAlt,
@@ -57,9 +58,11 @@ const WhyChoose = () => {
             Tulip Hospitality gives you the best travel experience.
           </p>
 
-          <button className="mt-8 bg-yellow-400 hover:bg-yellow-500 transition px-8 py-4 rounded-xl font-semibold">
-            Learn More About Us
-          </button>
+          <Link to="/about">
+            <button className="mt-8 bg-yellow-400 hover:bg-yellow-500 transition px-8 py-4 rounded-xl font-semibold">
+              Learn More About Us
+            </button>
+          </Link>
 
         </div>
 
