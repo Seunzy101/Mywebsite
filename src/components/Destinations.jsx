@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const destinations = [
   {
     city: "Dubai",
@@ -152,22 +153,21 @@ const Destinations = () => {
                 </div>
 
                 {/* Button */}
-                <button
-                  className="
-                    mt-6
-                    w-full
-                    bg-[#032B5B]
-                    hover:bg-yellow-400
-                    hover:text-black
-                    text-white
-                    transition
-                    py-3
-                    rounded-xl
-                    font-semibold
-                  "
-                >
-                  Book Now
-                </button>
+                <Link to="/bookings">
+                  <button
+                    className="
+      bg-yellow-400
+      hover:bg-yellow-500
+      text-white
+      px-6
+      py-3
+      rounded-xl
+      transition
+    "
+                  >
+                    Book Now
+                  </button>
+                </Link>
 
               </div>
 
