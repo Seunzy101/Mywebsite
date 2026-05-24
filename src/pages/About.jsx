@@ -104,18 +104,6 @@ export default function About() {
         <p className="text-white/70 mb-8 max-w-md mx-auto">
           Let Tulip Hospitality take care of every detail while you enjoy the adventure.
         </p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <a href="/flights">
-            <button className="bg-yellow-500 hover:bg-yellow-400 text-[#032B5B] font-bold px-8 py-3 rounded-xl transition-colors duration-300">
-              Book a Flight
-            </button>
-          </a>
-          <a href="/contact">
-            <button className="border-2 border-white text-white hover:bg-white hover:text-[#032B5B] font-bold px-8 py-3 rounded-xl transition-colors duration-300">
-              Contact Us
-            </button>
-          </a>
-        </div>
       </section>
 
     </div>
