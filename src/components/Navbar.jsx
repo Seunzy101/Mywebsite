@@ -45,7 +45,7 @@ const Navbar = () => {
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center gap-4">
 
-          <Link to="/account">
+          <Link to="/SignUp">
             <button
               className="
       bg-[#032B5B]
@@ -58,7 +58,7 @@ const Navbar = () => {
       duration-300
     "
             >
-              My Account
+              SignUp
             </button>
           </Link>
           <Link to="/bookings">
@@ -134,7 +134,7 @@ const Navbar = () => {
           {/* Mobile Buttons */}
           <div className="flex flex-col gap-3 mt-4">
 
-            <Link to="/account" onClick={() => setMenuOpen(false)}>
+            <Link to="/SignUp" onClick={() => setMenuOpen(false)}>
               <button
                 className="
       w-full
@@ -148,7 +148,7 @@ const Navbar = () => {
       duration-300
     "
               >
-                My Account
+                SignUp
               </button>
             </Link>
 

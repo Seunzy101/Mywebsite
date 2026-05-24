@@ -12,7 +12,7 @@ import Hotels from "./pages/Hotels"
 import Tours from "./pages/Tours"
 import Contact from "./pages/Contact"
 import About from "./pages/About"
-import Account from "./pages/Account";
+import SignUp from "./pages/SignUp.jsx";
 import Bookings from "./pages/Bookings"
 import Signin from "./pages/Signin";
 import Profile from "./pages/Profile";
@@ -42,7 +42,7 @@ export default function App() {
         <Route path="/tours" element={<Tours />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/profile" element={<Profile />} />
