@@ -67,7 +67,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-yellow-400">Email</span>
-                <span>info@tuliphospitality.com</span>
+                <span>ashiruseun17@gmail.com</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-yellow-400">Time</span>

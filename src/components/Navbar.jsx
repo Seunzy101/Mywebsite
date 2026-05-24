@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav
-  className="
+      className="
     sticky
     top-0
     z-50
@@ -19,7 +20,7 @@ const Navbar = () => {
     md:px-10
     py-4
   "
->
+    >
 
       <div className="flex justify-between items-center">
 
@@ -41,13 +42,56 @@ const Navbar = () => {
           <li><Link to="/about" className="hover:text-yellow-500">About</Link></li>
         </ul>
 
-        {/* Desktop Button */}
-        <Link to="/bookings">
-  <button className="hidden lg:block bg-[#032B5B] hover:bg-yellow-500 text-white px-5 py-3 rounded-xl transition-colors duration-300">
-    My Bookings
-  </button>
-</Link>
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex items-center gap-4">
 
+          <Link to="/account">
+            <button
+              className="
+      bg-[#032B5B]
+      hover:bg-yellow-500
+      text-white
+      px-5
+      py-3
+      rounded-xl
+      transition-colors
+      duration-300
+    "
+            >
+              My Account
+            </button>
+          </Link>
+          <Link to="/bookings">
+            <button
+              className="
+        bg-[#032B5B]
+        hover:bg-yellow-500
+        text-white
+        px-5
+        py-3
+        rounded-xl
+        transition-colors
+        duration-300
+      "
+            >
+              My Bookings
+            </button>
+          </Link>
+
+          {/* Profile Icon */}
+          <Link to="/profile">
+            <FaUserCircle
+              className="
+      text-4xl
+      text-[#032B5B]
+      hover:text-yellow-500
+      transition
+      cursor-pointer
+    "
+            />
+          </Link>
+
+        </div>
         {/* Mobile Icon */}
         <div
           className="lg:hidden text-2xl cursor-pointer"
@@ -60,22 +104,107 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="lg:hidden mt-6 flex flex-col gap-4">
-          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="/flights" onClick={() => setMenuOpen(false)}>Flights</Link>
-          <Link to="/hotels" onClick={() => setMenuOpen(false)}>Hotels</Link>
-          <Link to="/tours" onClick={() => setMenuOpen(false)}>Tours</Link>
-          <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
-          <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
-          <Link to="/bookings" onClick={() => setMenuOpen(false)}>
-  <button className="bg-[#032B5B] text-white px-5 py-3 rounded-xl mt-4">
-    My Bookings
-  </button>
-</Link>
+
+        <div className="lg:hidden mt-6 flex flex-col gap-4 bg-white rounded-2xl p-4 shadow-md">
+
+          <Link to="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </Link>
+
+          <Link to="/flights" onClick={() => setMenuOpen(false)}>
+            Flights
+          </Link>
+
+          <Link to="/hotels" onClick={() => setMenuOpen(false)}>
+            Hotels
+          </Link>
+
+          <Link to="/tours" onClick={() => setMenuOpen(false)}>
+            Tours
+          </Link>
+
+          <Link to="/contact" onClick={() => setMenuOpen(false)}>
+            Contact
+          </Link>
+
+          <Link to="/about" onClick={() => setMenuOpen(false)}>
+            About
+          </Link>
+
+          {/* Mobile Buttons */}
+          <div className="flex flex-col gap-3 mt-4">
+
+            <Link to="/account" onClick={() => setMenuOpen(false)}>
+              <button
+                className="
+      w-full
+      bg-[#032B5B]
+      hover:bg-yellow-500
+      text-white
+      px-5
+      py-3
+      rounded-xl
+      transition-colors
+      duration-300
+    "
+              >
+                My Account
+              </button>
+            </Link>
+
+            <Link to="/bookings" onClick={() => setMenuOpen(false)}>
+              <button
+                className="
+            w-full
+            bg-[#032B5B]
+            hover:bg-yellow-500
+            text-white
+            px-5
+            py-3
+            rounded-xl
+            transition
+          "
+              >
+                My Bookings
+              </button>
+            </Link>
+            <Link to="/profile" onClick={() => setMenuOpen(false)}>
+
+              <div
+                className="
+      flex
+      items-center
+      justify-center
+      gap-2
+      border
+      border-[#032B5B]
+      text-[#032B5B]
+      hover:bg-[#032B5B]
+      hover:text-white
+      py-3
+      rounded-xl
+      transition
+      cursor-pointer
+    "
+              >
+
+                <FaUserCircle className="text-2xl" />
+
+                <span className="font-medium">
+                  Profile
+                </span>
+
+              </div>
+
+            </Link>
+
+          </div>
+
         </div>
+
       )}
 
-    </nav> 
+    </nav>
   );
 };
 export default Navbar;
