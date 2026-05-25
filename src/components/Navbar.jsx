@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-yellow-500 font-semibold"
+      : "hover:text-yellow-500 transition";
+
+  const mobileNavLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-yellow-500 font-semibold py-1"
+      : "hover:text-yellow-500 transition py-1";
+
   return (
-    <nav
-      className="
-    sticky
-    top-0
-    z-50
-    bg-white/95
-    backdrop-blur-md
-    shadow-md
-    px-4
-    md:px-10
-    py-4
-  "
-    >
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md px-4 md:px-10 py-4">
 
       <div className="flex justify-between items-center">
 
@@ -34,67 +31,34 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex gap-8 font-medium">
-          <li><Link to="/" className="hover:text-yellow-500">Home</Link></li>
-          <li><Link to="/flights" className="hover:text-yellow-500">Flights</Link></li>
-          <li><Link to="/hotels" className="hover:text-yellow-500">Hotels</Link></li>
-          <li><Link to="/tours" className="hover:text-yellow-500">Tours</Link></li>
-          <li><Link to="/contact" className="hover:text-yellow-500">Contact</Link></li>
-          <li><Link to="/about" className="hover:text-yellow-500">About</Link></li>
+          <li><NavLink to="/" end className={navLinkClass}>Home</NavLink></li>
+          <li><NavLink to="/flights" className={navLinkClass}>Flights</NavLink></li>
+          <li><NavLink to="/hotels" className={navLinkClass}>Hotels</NavLink></li>
+          <li><NavLink to="/tours" className={navLinkClass}>Tours</NavLink></li>
+          <li><NavLink to="/contact" className={navLinkClass}>Contact</NavLink></li>
+          <li><NavLink to="/about" className={navLinkClass}>About</NavLink></li>
         </ul>
 
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-
-          <Link to="/SignUp">
-            <button
-              className="
-      bg-[#032B5B]
-      hover:bg-yellow-500
-      text-white
-      px-5
-      py-3
-      rounded-xl
-      transition-colors
-      duration-300
-    "
-            >
-              SignUp
+          <NavLink to="/signup">
+            <button className="bg-[#032B5B] hover:bg-yellow-500 text-white px-5 py-3 rounded-xl transition-colors duration-300">
+              Sign Up
             </button>
-          </Link>
-          <Link to="/bookings">
-            <button
-              className="
-        bg-[#032B5B]
-        hover:bg-yellow-500
-        text-white
-        px-5
-        py-3
-        rounded-xl
-        transition-colors
-        duration-300
-      "
-            >
+          </NavLink>
+          <NavLink to="/bookings">
+            <button className="bg-[#032B5B] hover:bg-yellow-500 text-white px-5 py-3 rounded-xl transition-colors duration-300">
               My Bookings
             </button>
-          </Link>
-
-          {/* Profile Icon */}
-          <Link to="/profile">
-            <FaUserCircle
-              className="
-      text-4xl
-      text-[#032B5B]
-      hover:text-yellow-500
-      transition
-      cursor-pointer
-    "
-            />
-          </Link>
-
+          </NavLink>
+          <NavLink to="/profile">
+            <FaUserCircle className="text-4xl text-[#032B5B] hover:text-yellow-500 transition cursor-pointer" />
+          </NavLink>
         </div>
-        {/* Mobile Icon */}
+
+        {/* Mobile Hamburger */}
         <div
-          className="lg:hidden text-2xl cursor-pointer"
+          className="lg:hidden text-2xl cursor-pointer text-[#032B5B]"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
@@ -104,107 +68,39 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
+        <div className="lg:hidden mt-4 flex flex-col gap-2 bg-white rounded-2xl p-4 shadow-md">
 
-        <div className="lg:hidden mt-6 flex flex-col gap-4 bg-white rounded-2xl p-4 shadow-md">
+          <NavLink to="/" end className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Home</NavLink>
+          <NavLink to="/flights" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Flights</NavLink>
+          <NavLink to="/hotels" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Hotels</NavLink>
+          <NavLink to="/tours" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Tours</NavLink>
+          <NavLink to="/contact" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>Contact</NavLink>
+          <NavLink to="/about" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>About</NavLink>
 
-          <Link to="/" onClick={() => setMenuOpen(false)}>
-            Home
-          </Link>
-
-          <Link to="/flights" onClick={() => setMenuOpen(false)}>
-            Flights
-          </Link>
-
-          <Link to="/hotels" onClick={() => setMenuOpen(false)}>
-            Hotels
-          </Link>
-
-          <Link to="/tours" onClick={() => setMenuOpen(false)}>
-            Tours
-          </Link>
-
-          <Link to="/contact" onClick={() => setMenuOpen(false)}>
-            Contact
-          </Link>
-
-          <Link to="/about" onClick={() => setMenuOpen(false)}>
-            About
-          </Link>
-
-          {/* Mobile Buttons */}
           <div className="flex flex-col gap-3 mt-4">
-
-            <Link to="/SignUp" onClick={() => setMenuOpen(false)}>
-              <button
-                className="
-      w-full
-      bg-[#032B5B]
-      hover:bg-yellow-500
-      text-white
-      px-5
-      py-3
-      rounded-xl
-      transition-colors
-      duration-300
-    "
-              >
-                SignUp
+            <NavLink to="/signup" onClick={() => setMenuOpen(false)}>
+              <button className="w-full bg-[#032B5B] hover:bg-yellow-500 text-white px-5 py-3 rounded-xl transition-colors duration-300">
+                Sign Up
               </button>
-            </Link>
-
-            <Link to="/bookings" onClick={() => setMenuOpen(false)}>
-              <button
-                className="
-            w-full
-            bg-[#032B5B]
-            hover:bg-yellow-500
-            text-white
-            px-5
-            py-3
-            rounded-xl
-            transition
-          "
-              >
+            </NavLink>
+            <NavLink to="/bookings" onClick={() => setMenuOpen(false)}>
+              <button className="w-full bg-[#032B5B] hover:bg-yellow-500 text-white px-5 py-3 rounded-xl transition">
                 My Bookings
               </button>
-            </Link>
-            <Link to="/profile" onClick={() => setMenuOpen(false)}>
-
-              <div
-                className="
-      flex
-      items-center
-      justify-center
-      gap-2
-      border
-      border-[#032B5B]
-      text-[#032B5B]
-      hover:bg-[#032B5B]
-      hover:text-white
-      py-3
-      rounded-xl
-      transition
-      cursor-pointer
-    "
-              >
-
+            </NavLink>
+            <NavLink to="/profile" onClick={() => setMenuOpen(false)}>
+              <div className="flex items-center justify-center gap-2 border border-[#032B5B] text-[#032B5B] hover:bg-[#032B5B] hover:text-white py-3 rounded-xl transition cursor-pointer">
                 <FaUserCircle className="text-2xl" />
-
-                <span className="font-medium">
-                  Profile
-                </span>
-
+                <span className="font-medium">Profile</span>
               </div>
-
-            </Link>
-
+            </NavLink>
           </div>
 
         </div>
-
       )}
 
     </nav>
   );
 };
+
 export default Navbar;

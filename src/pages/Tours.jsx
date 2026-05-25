@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { BookingContext } from "../context/BookingContext";
 import {
   FaMapMarkedAlt,
@@ -11,371 +12,141 @@ import {
 const tours = [
   {
     title: "Dubai Luxury Tour",
+    destination: "Dubai, UAE",
     location: "Dubai, UAE",
     price: "₦850,000",
     days: "5 Days",
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
   },
-
   {
     title: "Paris Romantic Tour",
+    destination: "Paris, France",
     location: "Paris, France",
     price: "₦950,000",
     days: "7 Days",
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
   },
-
   {
     title: "United Kingdom Tour",
+    destination: "London, UK",
     location: "London, UK",
     price: "₦780,000",
     days: "4 Days",
-    image:
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
   },
-
   {
     title: "Maldives Beach Tour",
+    destination: "Maldives",
     location: "Maldives",
     price: "₦980,000",
     days: "5 Days",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   },
 ];
 
 const Tours = () => {
   const { addBooking } = useContext(BookingContext);
+  const navigate = useNavigate();
+
+  const handleBook = (tour) => {
+    addBooking(tour);
+    navigate("/bookings");
+  };
+
   return (
     <section className="bg-gray-50 min-h-screen">
 
       {/* Hero Section */}
       <div
-        className="
-          relative
-          h-[70vh]
-          bg-cover
-          bg-center
-          flex
-          items-center
-          justify-center
-        "
+        className="relative h-[70vh] bg-cover bg-center flex items-center justify-center"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')",
         }}
       >
-
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/60"></div>
-
-        {/* Content */}
         <div className="relative z-10 text-center text-white px-4">
-
           <p className="uppercase tracking-widest text-yellow-400 mb-4">
             Explore Amazing Places
           </p>
-
-          <h1 className="
-            text-4xl
-            md:text-6xl
-            font-bold
-            leading-tight
-          ">
-            Discover Beautiful <br />
-            Tour Destinations
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            Discover Beautiful <br /> Tour Destinations
           </h1>
-
         </div>
-
       </div>
 
       {/* Search Box */}
-      <div className="
-        relative
-        z-20
-        px-4
-        md:px-10
-        lg:px-20
-        -mt-16
-      ">
+      <div className="relative z-20 px-4 md:px-10 lg:px-20 -mt-16">
+        <div className="bg-white shadow-2xl rounded-3xl p-6 md:p-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-        <div className="
-          bg-white
-          shadow-2xl
-          rounded-3xl
-          p-6
-          md:p-8
-          max-w-7xl
-          mx-auto
-        ">
-
-          <div className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-4
-            gap-4
-          ">
-
-            {/* Destination */}
             <div className="relative">
-
-              <FaMapMarkedAlt
-                className="
-                  absolute
-                  top-5
-                  left-4
-                  text-gray-400
-                "
-              />
-
-              <input
-                type="text"
-                placeholder="Destination"
-                className="
-                  w-full
-                  border
-                  border-gray-300
-                  rounded-xl
-                  py-4
-                  pl-12
-                  pr-4
-                  outline-none
-                "
-              />
-
+              <FaMapMarkedAlt className="absolute top-5 left-4 text-gray-400" />
+              <input type="text" placeholder="Destination" className="w-full border border-gray-300 rounded-xl py-4 pl-12 pr-4 outline-none" />
             </div>
 
-            {/* Date */}
             <div className="relative">
-
-              <FaCalendarAlt
-                className="
-                  absolute
-                  top-5
-                  left-4
-                  text-gray-400
-                "
-              />
-
-              <input
-                type="date"
-                className="
-                  w-full
-                  border
-                  border-gray-300
-                  rounded-xl
-                  py-4
-                  pl-12
-                  pr-4
-                  outline-none
-                "
-              />
-
+              <FaCalendarAlt className="absolute top-5 left-4 text-gray-400" />
+              <input type="date" className="w-full border border-gray-300 rounded-xl py-4 pl-12 pr-4 outline-none" />
             </div>
 
-            {/* Travelers */}
             <div className="relative">
-
-              <FaUsers
-                className="
-                  absolute
-                  top-5
-                  left-4
-                  text-gray-400
-                "
-              />
-
-              <input
-                type="number"
-                placeholder="Travelers"
-                className="
-                  w-full
-                  border
-                  border-gray-300
-                  rounded-xl
-                  py-4
-                  pl-12
-                  pr-4
-                  outline-none
-                "
-              />
-
+              <FaUsers className="absolute top-5 left-4 text-gray-400" />
+              <input type="number" placeholder="Travelers" className="w-full border border-gray-300 rounded-xl py-4 pl-12 pr-4 outline-none" />
             </div>
 
-            {/* Button */}
-            <button
-              className="
-                bg-yellow-400
-                hover:bg-yellow-500
-                transition
-                rounded-xl
-                font-semibold
-                flex
-                items-center
-                justify-center
-                gap-3
-                py-4
-              "
-            >
-
-              <FaSearch />
-
-              Search Tours
-
+            <button className="bg-yellow-400 hover:bg-yellow-500 transition rounded-xl font-semibold flex items-center justify-center gap-3 py-4">
+              <FaSearch /> Search Tours
             </button>
 
           </div>
-
         </div>
-
       </div>
 
-      {/* Tour Packages */}
-      <div className="
-        py-24
-        px-4
-        md:px-10
-        lg:px-20
-      ">
-
+      {/* Tour Cards */}
+      <div className="py-24 px-4 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
 
-          {/* Heading */}
           <div className="text-center mb-14">
-
-            <p className="text-yellow-500 uppercase font-semibold">
-              Popular Packages
-            </p>
-
-            <h2 className="
-              text-3xl
-              md:text-5xl
-              font-bold
-              text-[#032B5B]
-              mt-3
-            ">
+            <p className="text-yellow-500 uppercase font-semibold">Popular Packages</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-[#032B5B] mt-3">
               Best Tour Packages
             </h2>
-
           </div>
 
-          {/* Tour Cards */}
-          <div className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-4
-            gap-8
-          ">
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {tours.map((tour, index) => (
               <div
                 key={index}
-                className="
-                  bg-white
-                  rounded-3xl
-                  overflow-hidden
-                  shadow-lg
-                  hover:shadow-2xl
-                  transition
-                  duration-300
-                "
+                className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
               >
-
-                {/* Image */}
-                <img
-                  src={tour.image}
-                  alt=""
-                  className="
-                    w-full
-                    h-64
-                    object-cover
-                  "
-                />
-
-                {/* Content */}
+                <img src={tour.image} alt="" className="w-full h-64 object-cover" />
                 <div className="p-6">
 
-                  {/* Rating */}
-                  <div className="
-                    flex
-                    items-center
-                    gap-2
-                    text-yellow-400
-                    mb-4
-                  ">
-
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-
+                  <div className="flex items-center gap-2 text-yellow-400 mb-4">
+                    <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
                   </div>
 
-                  <h3 className="
-                    text-2xl
-                    font-bold
-                    text-[#032B5B]
-                    mb-2
-                  ">
-                    {tour.title}
-                  </h3>
+                  <h3 className="text-2xl font-bold text-[#032B5B] mb-2">{tour.title}</h3>
+                  <p className="text-gray-500 mb-2">{tour.location}</p>
+                  <p className="text-gray-500 mb-6">{tour.days}</p>
 
-                  <p className="text-gray-500 mb-2">
-                    {tour.location}
-                  </p>
-
-                  <p className="text-gray-500 mb-6">
-                    {tour.days}
-                  </p>
-
-                  <div className="
-                    flex
-                    justify-between
-                    items-center
-                  ">
-
-                    <p className="
-                      text-yellow-500
-                      font-bold
-                      text-xl
-                    ">
-                      {tour.price}
-                    </p>
-
+                  <div className="flex justify-between items-center">
+                    <p className="text-yellow-500 font-bold text-xl">{tour.price}</p>
                     <button
-                      onClick={() => addBooking(tour)}
-                      className="
-                        bg-[#032B5B]
-                        hover:bg-yellow-400
-                        hover:text-black
-                        transition
-                        text-white
-                        px-5
-                        py-3
-                        rounded-xl
-                        font-semibold
-                      "
+                      onClick={() => handleBook(tour)}
+                      className="bg-[#032B5B] hover:bg-yellow-400 hover:text-black transition text-white px-5 py-3 rounded-xl font-semibold"
                     >
                       Book Now
                     </button>
-
                   </div>
 
                 </div>
-
               </div>
             ))}
-
           </div>
 
         </div>
-
       </div>
 
     </section>
