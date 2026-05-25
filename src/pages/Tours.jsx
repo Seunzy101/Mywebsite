@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { BookingContext } from "../context/BookingContext";
 import {
   FaMapMarkedAlt,
   FaCalendarAlt,
@@ -45,6 +47,7 @@ const tours = [
 ];
 
 const Tours = () => {
+  const { addBooking } = useContext(BookingContext);
   return (
     <section className="bg-gray-50 min-h-screen">
 
@@ -346,6 +349,7 @@ const Tours = () => {
                     </p>
 
                     <button
+                      onClick={() => addBooking(tour)}
                       className="
                         bg-[#032B5B]
                         hover:bg-yellow-400
