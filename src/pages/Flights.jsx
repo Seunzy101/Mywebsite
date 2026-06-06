@@ -15,7 +15,7 @@ const flights = [
     destination: "Dubai",
     from: "Lagos",
     to: "Dubai",
-    price: "₦320,000",
+    price: "₦620,000",
     image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
   },
   {
@@ -23,7 +23,7 @@ const flights = [
     destination: "London",
     from: "Abuja",
     to: "London",
-    price: "₦450,000",
+    price: "₦850,000",
     image: "https://images.unsplash.com/photo-1505764706515-aa95265c5abc",
   },
   {
@@ -31,7 +31,7 @@ const flights = [
     destination: "Paris",
     from: "Port Harcourt",
     to: "Paris",
-    price: "₦480,000",
+    price: "₦980,000",
     image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3",
   },
   {
@@ -39,7 +39,7 @@ const flights = [
     destination: "New York",
     from: "Lagos",
     to: "New York",
-    price: "₦550,000",
+    price: "₦950,000",
     image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05",
   },
 ];

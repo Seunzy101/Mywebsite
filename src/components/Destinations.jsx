@@ -6,7 +6,7 @@ const destinations = [
   {
     city: "Dubai",
     country: "United Arab Emirates",
-    price: "₦320,000",
+    price: "₦620,000",
     image:
       "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
   },
@@ -14,7 +14,7 @@ const destinations = [
   {
     city: "London",
     country: "United Kingdom",
-    price: "₦450,000",
+    price: "₦850,000",
     image:
       "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
   },
@@ -22,7 +22,7 @@ const destinations = [
   {
     city: "Paris",
     country: "Europe France",
-    price: "₦480,000",
+    price: "₦980,000",
     image:
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
   },
@@ -30,7 +30,7 @@ const destinations = [
   {
     city: "Texas",
     country: "United States America",
-    price: "₦550,000",
+    price: "₦950,000",
     image:
       "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2",
   },
