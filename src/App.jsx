@@ -71,6 +71,7 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/flights" element={<Flights />} />
       </Routes>
       <Footer />
 

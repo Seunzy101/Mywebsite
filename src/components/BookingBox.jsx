@@ -1,4 +1,25 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Booking = () => {
+  const navigate = useNavigate();
+
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [departure, setDeparture] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+
+  const handleSearch = () => {
+    navigate("/flights", {
+      state: {
+        from,
+        to,
+        departure,
+        returnDate,
+      },
+    });
+  };
+
   return (
     <section className="relative z-20 px-4 md:px-10 lg:px-20 -mt-16">
 
@@ -16,7 +37,6 @@ const Booking = () => {
 
         {/* Heading */}
         <div className="mb-8">
-
           <p className="text-yellow-500 font-semibold uppercase">
             Book Your Trip
           </p>
@@ -24,7 +44,6 @@ const Booking = () => {
           <h2 className="text-2xl md:text-4xl font-bold text-[#032B5B] mt-2">
             Find Your Perfect Flight
           </h2>
-
         </div>
 
         {/* Booking Form */}
@@ -42,6 +61,8 @@ const Booking = () => {
           <input
             type="text"
             placeholder="From"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
             className="
               border
               border-gray-300
@@ -58,6 +79,8 @@ const Booking = () => {
           <input
             type="text"
             placeholder="To"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
             className="
               border
               border-gray-300
@@ -73,6 +96,8 @@ const Booking = () => {
           {/* Departure */}
           <input
             type="date"
+            value={departure}
+            onChange={(e) => setDeparture(e.target.value)}
             className="
               border
               border-gray-300
@@ -88,6 +113,8 @@ const Booking = () => {
           {/* Return */}
           <input
             type="date"
+            value={returnDate}
+            onChange={(e) => setReturnDate(e.target.value)}
             className="
               border
               border-gray-300
@@ -102,6 +129,7 @@ const Booking = () => {
 
           {/* Button */}
           <button
+            onClick={handleSearch}
             className="
               bg-yellow-400
               hover:bg-yellow-500
