@@ -41,13 +41,11 @@ const Destinations = () => {
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // OPEN MODAL
   const handleBook = (item) => {
     setSelectedItem(item);
     setOpen(true);
   };
 
-  // SUBMIT BOOKING
   const handleSubmit = (formData) => {
     if (!selectedItem) return;
 
@@ -127,7 +125,6 @@ const Destinations = () => {
           ))}
         </div>
 
-        {/* MODAL */}
         <BookingModal
           isOpen={open}
           onClose={() => setOpen(false)}

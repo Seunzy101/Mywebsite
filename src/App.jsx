@@ -25,7 +25,7 @@ import Bookings from "./pages/Bookings";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Payment from "./pages/Payment";
-import BookingDetails from "./pages/BookingDetails"; // ✅ IMPORTANT ADDITION
+import BookingDetails from "./pages/BookingDetails"; 
 
 // HOME
 function Home() {
@@ -73,43 +73,26 @@ export default function App() {
 
         <Routes>
 
-          {/* HOME */}
+          
           <Route path="/" element={<Home />} />
-
-          {/* TRAVEL PAGES */}
           <Route path="/flights" element={<Flights />} />
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/tours" element={<Tours />} />
-
-          {/* INFO PAGES */}
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-
-          {/* AUTH */}
+          <Route path="/contact" element={<Contact />} />        
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<Signin />} />
-
-          {/* USER */}
           <Route path="/profile" element={<Profile />} />
           <Route path="/edit-profile" element={<EditProfile />} />
-
-          {/* BOOKINGS */}
           <Route path="/bookings" element={<Bookings />} />
-
-          {/* BOOKING DETAILS (NEW FEATURE) */}
           <Route path="/booking/:id" element={<BookingDetails />} />
-
-          {/* PAYMENT */}
           <Route path="/payment/:id" element={<Payment />} />
-
-          {/* 404 */}
           <Route path="*" element={<NotFound />} />
 
         </Routes>
 
         <Footer />
-
-        {/* TOAST NOTIFICATIONS */}
+        
         <ToastContainer
           position="top-right"
           autoClose={3000}

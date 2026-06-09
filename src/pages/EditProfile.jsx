@@ -1,6 +1,36 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const EditProfile = () => {
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    location: "",
+  });
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) setForm(user);
+  }, []);
+
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    localStorage.setItem("user", JSON.stringify(form));
+
+    toast.success("Profile updated successfully");
+
+    setTimeout(() => {
+      navigate("/profile");
+    }, 1000);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-6">
 
       <div className="bg-white p-10 rounded-3xl shadow-lg w-full max-w-2xl">
 
@@ -8,49 +38,33 @@ const EditProfile = () => {
           Edit Profile
         </h1>
 
-        <form className="grid md:grid-cols-2 gap-6">
+        <form onSubmit={handleSave} className="grid md:grid-cols-2 gap-6">
 
-          <input
-            type="text"
+          <input value={form.fullName}
+            onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+            className="border p-4 rounded-xl"
             placeholder="Full Name"
-            className="border p-4 rounded-xl outline-none"
           />
 
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="border p-4 rounded-xl outline-none"
+          <input value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            className="border p-4 rounded-xl"
+            placeholder="Email"
           />
 
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className="border p-4 rounded-xl outline-none"
+          <input value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            className="border p-4 rounded-xl"
+            placeholder="Phone"
           />
 
-          <input
-            type="text"
+          <input value={form.location}
+            onChange={(e) => setForm({ ...form, location: e.target.value })}
+            className="border p-4 rounded-xl"
             placeholder="Location"
-            className="border p-4 rounded-xl outline-none"
           />
 
-          <input
-            type="password"
-            placeholder="New Password"
-            className="border p-4 rounded-xl outline-none md:col-span-2"
-          />
-
-          <button
-            className="
-              md:col-span-2
-              bg-[#032B5B]
-              hover:bg-yellow-500
-              text-white
-              py-4
-              rounded-xl
-              transition
-            "
-          >
+          <button className="md:col-span-2 bg-[#032B5B] text-white py-4 rounded-xl">
             Save Changes
           </button>
 

@@ -36,7 +36,6 @@ const Hero = () => {
           {/* Buttons */}
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
 
-            {/* Navigate to Flights */}
             <button
               onClick={() => navigate('/flights')}
               className="bg-yellow-400 hover:bg-yellow-500 transition text-black font-semibold px-8 py-4 rounded-xl w-full sm:w-auto"
@@ -44,7 +43,6 @@ const Hero = () => {
               Explore Now
             </button>
 
-            {/* Navigate to About */}
             <button
               onClick={() => navigate('/about')}
               className="border border-white hover:bg-white hover:text-black transition px-8 py-4 rounded-xl w-full sm:w-auto"

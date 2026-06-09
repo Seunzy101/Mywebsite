@@ -79,7 +79,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="border-t border-white/10 py-6 px-4 text-center text-gray-400 text-sm">
         © 2026 Tulip Hospitality. All Rights Reserved. Built with love by Seun Tutored by Mr. Raymond.
       </div>

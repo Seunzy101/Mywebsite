@@ -42,8 +42,7 @@ export const BookingProvider = ({ children }) => {
 
     toast.success("Booking added successfully!");
   };
-
-  // ✅ UPDATE STATUS (THIS FIXES YOUR PAYMENT ISSUE)
+  // UPDATE BOOKING STATUS
   const updateBookingStatus = (id, status) => {
     setBookings((prev) =>
       prev.map((booking) =>
@@ -55,7 +54,7 @@ export const BookingProvider = ({ children }) => {
 
   };
 
-  // ❌ CANCEL BOOKING
+  // CANCEL BOOKING
   const cancelBooking = (id) => {
     setBookings((prev) =>
       prev.map((booking) =>
@@ -68,7 +67,7 @@ export const BookingProvider = ({ children }) => {
     toast.error("Booking canceled");
   };
 
-  // 🧹 CLEAR ALL
+  //  CLEAR ALL
   const clearBookings = () => {
     setBookings([]);
     localStorage.removeItem("bookings");
