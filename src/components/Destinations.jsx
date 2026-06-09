@@ -4,32 +4,29 @@ import { BookingContext } from "../context/BookingContext";
 
 const destinations = [
   {
-    city: "Dubai",
-    country: "United Arab Emirates",
+    title: "Dubai",
+    destination: "United Arab Emirates",
     price: "₦620,000",
     image:
       "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
   },
-
   {
-    city: "London",
-    country: "United Kingdom",
+    title: "London",
+    destination: "United Kingdom",
     price: "₦850,000",
     image:
       "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
   },
-
   {
-    city: "Paris",
-    country: "Europe France",
+    title: "Paris",
+    destination: "France",
     price: "₦980,000",
     image:
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
   },
-
   {
-    city: "Texas",
-    country: "United States America",
+    title: "Texas",
+    destination: "United States",
     price: "₦950,000",
     image:
       "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2",
@@ -41,17 +38,23 @@ const Destinations = () => {
   const navigate = useNavigate();
 
   const handleBook = (item) => {
-    addBooking(item);
+    addBooking({
+      title: item.title,
+      destination: item.destination,
+      price: item.price,
+      image: item.image,
+      type: "Destination",
+      dateBooked: new Date().toLocaleDateString(),
+    });
+
     navigate("/bookings");
   };
 
   return (
     <section className="py-20 px-4 md:px-10 lg:px-20 bg-gray-100">
-
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-14">
-
           <p className="text-yellow-500 uppercase font-semibold">
             Popular Destinations
           </p>
@@ -61,14 +64,12 @@ const Destinations = () => {
           </h2>
 
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto leading-8">
-            Discover amazing places around the world with
-            affordable travel packages and unforgettable experiences.
+            Discover amazing places around the world with affordable travel
+            packages and unforgettable experiences.
           </p>
-
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
           {destinations.map((item, index) => (
             <div
               key={index}
@@ -83,42 +84,35 @@ const Destinations = () => {
                 duration-300
               "
             >
-
               <div className="overflow-hidden">
-
                 <img
                   src={item.image}
-                  alt={item.city}
+                  alt={item.title}
                   className="
                     w-full
-                    h-56 md:h-64
+                    h-56
+                    md:h-64
                     object-cover
                     hover:scale-110
                     transition
                     duration-500
                   "
                 />
-
               </div>
 
               <div className="p-6">
-
                 <div className="flex justify-between items-start gap-4">
-
                   <div>
-
                     <h3 className="text-2xl font-bold text-[#032B5B]">
-                      {item.city}
+                      {item.title}
                     </h3>
 
                     <p className="text-gray-500 mt-1">
-                      {item.country}
+                      {item.destination}
                     </p>
-
                   </div>
 
                   <div className="text-right">
-
                     <p className="text-sm text-gray-500">
                       From
                     </p>
@@ -126,13 +120,10 @@ const Destinations = () => {
                     <h4 className="text-xl font-bold text-yellow-500">
                       {item.price}
                     </h4>
-
                   </div>
-
                 </div>
 
                 <div className="mt-6">
-
                   <button
                     onClick={() => handleBook(item)}
                     className="
@@ -150,18 +141,14 @@ const Destinations = () => {
                   >
                     Book Now
                   </button>
-
                 </div>
 
               </div>
-
             </div>
           ))}
-
         </div>
 
       </div>
-
     </section>
   );
 };
