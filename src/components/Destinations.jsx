@@ -19,14 +19,14 @@ const destinations = [
   },
   {
     title: "Paris",
-    destination: "France",
+    destination: "Europe France",
     price: "₦980,000",
     image:
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
   },
   {
     title: "Texas",
-    destination: "United States",
+    destination: "United States America",
     price: "₦950,000",
     image:
       "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2",

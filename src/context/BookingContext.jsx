@@ -58,8 +58,8 @@ export const BookingProvider = ({ children }) => {
     );
 
     if (status === "Confirmed") {
-      toast.success("Payment successful 🎉 Booking Confirmed");
-    }
+  // no toast here (IMPORTANT)
+}
   };
 
   // CANCEL BOOKING
