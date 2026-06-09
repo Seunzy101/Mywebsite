@@ -1,13 +1,9 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingContext } from "../context/BookingContext";
-import {
-  FaMapMarkedAlt,
-  FaCalendarAlt,
-  FaUsers,
-  FaSearch,
-  FaStar,
-} from "react-icons/fa";
+import BookingModal from "../components/BookingModal";
+
+import { FaSearch, FaStar } from "react-icons/fa";
 
 const tours = [
   {
@@ -48,15 +44,43 @@ const Tours = () => {
   const { addBooking } = useContext(BookingContext);
   const navigate = useNavigate();
 
+  const [open, setOpen] = useState(false);
+  const [selectedTour, setSelectedTour] = useState(null);
+
   const handleBook = (tour) => {
-    addBooking(tour);
+    setSelectedTour(tour);
+    setOpen(true);
+  };
+
+  // ✅ FIXED VERSION (STANDARDIZED DATA)
+  const handleSubmit = (formData) => {
+    if (!selectedTour) return;
+
+    addBooking({
+      title: selectedTour.title,
+      destination: selectedTour.destination,
+      price: selectedTour.price,
+      image: selectedTour.image,
+      days: selectedTour.days,
+
+      // client info (IMPORTANT FIX)
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      guests: formData.guests,
+      departureDate: formData.departureDate,
+      returnDate: formData.returnDate,
+    });
+
+    setOpen(false);
+    setSelectedTour(null);
     navigate("/bookings");
   };
 
   return (
     <section className="bg-gray-50 min-h-screen">
 
-      {/* Hero Section */}
+      {/* HERO */}
       <div
         className="relative h-[70vh] bg-cover bg-center flex items-center justify-center"
         style={{
@@ -69,85 +93,93 @@ const Tours = () => {
           <p className="uppercase tracking-widest text-yellow-400 mb-4">
             Explore Amazing Places
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            Discover Beautiful <br /> Tour Destinations
+          <h1 className="text-4xl md:text-6xl font-bold">
+            Discover Beautiful Tour Destinations
           </h1>
         </div>
       </div>
 
-      {/* Search Box */}
+      {/* SEARCH (UI ONLY) */}
       <div className="relative z-20 px-4 md:px-10 lg:px-20 -mt-16">
-        <div className="bg-white shadow-2xl rounded-3xl p-6 md:p-8 max-w-7xl mx-auto">
+        <div className="bg-white shadow-2xl rounded-3xl p-6 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-            <div className="relative">
-              <FaMapMarkedAlt className="absolute top-5 left-4 text-gray-400" />
-              <input type="text" placeholder="Destination" className="w-full border border-gray-300 rounded-xl py-4 pl-12 pr-4 outline-none" />
-            </div>
+            <input type="text" placeholder="Destination" className="border p-3 rounded-xl" />
+            <input type="date" className="border p-3 rounded-xl" />
+            <input type="number" placeholder="Travelers" className="border p-3 rounded-xl" />
 
-            <div className="relative">
-              <FaCalendarAlt className="absolute top-5 left-4 text-gray-400" />
-              <input type="date" className="w-full border border-gray-300 rounded-xl py-4 pl-12 pr-4 outline-none" />
-            </div>
-
-            <div className="relative">
-              <FaUsers className="absolute top-5 left-4 text-gray-400" />
-              <input type="number" placeholder="Travelers" className="w-full border border-gray-300 rounded-xl py-4 pl-12 pr-4 outline-none" />
-            </div>
-
-            <button className="bg-yellow-400 hover:bg-yellow-500 transition rounded-xl font-semibold flex items-center justify-center gap-3 py-4">
-              <FaSearch /> Search Tours
+            <button className="bg-yellow-400 rounded-xl font-semibold py-3">
+              <FaSearch className="inline mr-2" />
+              Search Tours
             </button>
 
           </div>
         </div>
       </div>
 
-      {/* Tour Cards */}
+      {/* TOURS */}
       <div className="py-24 px-4 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
 
           <div className="text-center mb-14">
-            <p className="text-yellow-500 uppercase font-semibold">Popular Packages</p>
+            <p className="text-yellow-500 uppercase font-semibold">
+              Popular Packages
+            </p>
             <h2 className="text-3xl md:text-5xl font-bold text-[#032B5B] mt-3">
               Best Tour Packages
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
             {tours.map((tour, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
-              >
-                <img src={tour.image} alt="" className="w-full h-64 object-cover" />
+              <div key={index} className="bg-white rounded-3xl overflow-hidden shadow-lg">
+
+                <img src={tour.image} className="w-full h-64 object-cover" />
+
                 <div className="p-6">
 
-                  <div className="flex items-center gap-2 text-yellow-400 mb-4">
+                  <div className="flex gap-1 text-yellow-400 mb-3">
                     <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-[#032B5B] mb-2">{tour.title}</h3>
-                  <p className="text-gray-500 mb-2">{tour.location}</p>
-                  <p className="text-gray-500 mb-6">{tour.days}</p>
+                  <h3 className="text-2xl font-bold text-[#032B5B]">
+                    {tour.title}
+                  </h3>
+
+                  <p className="text-gray-500">{tour.location}</p>
+                  <p className="text-gray-500 mb-4">{tour.days}</p>
 
                   <div className="flex justify-between items-center">
-                    <p className="text-yellow-500 font-bold text-xl">{tour.price}</p>
+                    <p className="text-yellow-500 font-bold text-xl">
+                      {tour.price}
+                    </p>
+
                     <button
                       onClick={() => handleBook(tour)}
-                      className="bg-[#032B5B] hover:bg-yellow-400 hover:text-black transition text-white px-5 py-3 rounded-xl font-semibold"
+                      className="bg-[#032B5B] text-white px-5 py-3 rounded-xl hover:bg-yellow-400 hover:text-black transition"
                     >
                       Book Now
                     </button>
                   </div>
 
                 </div>
+
               </div>
             ))}
+
           </div>
 
         </div>
       </div>
+
+      {/* MODAL */}
+      <BookingModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onSubmit={handleSubmit}
+        item={selectedTour}
+      />
 
     </section>
   );
