@@ -11,7 +11,7 @@ const Hero = () => {
           "url('https://images.unsplash.com/photo-1501785888041-af3ef285b470')",
       }}
     >
-      {/* Dark Overlay */}
+      
       <div className="absolute inset-0 bg-black/50"></div>
 
       {/* Content */}

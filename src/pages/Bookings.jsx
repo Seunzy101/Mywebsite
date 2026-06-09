@@ -49,7 +49,7 @@ const Bookings = () => {
           My Bookings
         </h1>
 
-        {/* Statistics */}
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
 
           <div className="bg-blue-100 p-6 rounded-3xl shadow-md">
@@ -90,7 +90,7 @@ const Bookings = () => {
 
         </div>
 
-        {/* Search + Filter */}
+
         <div className="bg-white p-6 rounded-3xl shadow-md mb-8">
 
           <div className="flex flex-col md:flex-row gap-4">
@@ -147,7 +147,7 @@ const Bookings = () => {
 
         </div>
 
-        {/* Empty State */}
+
         {filteredBookings.length === 0 ? (
           <div className="bg-white rounded-3xl shadow-md p-12 text-center">
 
@@ -196,15 +196,14 @@ const Bookings = () => {
 
                 <div className="flex flex-col gap-3">
 
-                  {/* Status Pill */}
+
                   <div
-                    className={`px-4 py-2 rounded-full text-white text-sm font-semibold text-center ${
-                      booking.status === "Pending"
+                    className={`px-4 py-2 rounded-full text-white text-sm font-semibold text-center ${booking.status === "Pending"
                         ? "bg-yellow-500"
                         : booking.status === "Confirmed"
-                        ? "bg-green-500"
-                        : "bg-red-500"
-                    }`}
+                          ? "bg-green-500"
+                          : "bg-red-500"
+                      }`}
                   >
                     {booking.status}
                   </div>
@@ -218,12 +217,11 @@ const Bookings = () => {
                       booking.status === "Confirmed" ||
                       booking.status === "Canceled"
                     }
-                    className={`py-3 px-5 rounded-xl transition text-white ${
-                      booking.status === "Confirmed" ||
-                      booking.status === "Canceled"
+                    className={`py-3 px-5 rounded-xl transition text-white ${booking.status === "Confirmed" ||
+                        booking.status === "Canceled"
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-green-500 hover:bg-green-600"
-                    }`}
+                      }`}
                   >
                     {booking.status === "Confirmed"
                       ? "Confirmed"
@@ -237,12 +235,11 @@ const Bookings = () => {
                       booking.status === "Canceled" ||
                       booking.status === "Confirmed"
                     }
-                    className={`py-3 px-5 rounded-xl transition text-white ${
-                      booking.status === "Canceled" ||
-                      booking.status === "Confirmed"
+                    className={`py-3 px-5 rounded-xl transition text-white ${booking.status === "Canceled" ||
+                        booking.status === "Confirmed"
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-red-500 hover:bg-red-600"
-                    }`}
+                      }`}
                   >
                     {booking.status === "Canceled"
                       ? "Canceled"

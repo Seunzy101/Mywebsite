@@ -29,10 +29,10 @@ const Contact = () => {
         }}
       >
 
-        {/* Overlay */}
+        
         <div className="absolute inset-0 bg-black/50"></div>
 
-        {/* Content */}
+        
         <div className="relative z-10 text-center text-white px-4">
 
           <p className="uppercase tracking-widest text-yellow-400 mb-4">

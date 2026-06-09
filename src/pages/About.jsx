@@ -60,7 +60,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Values */}
+      
       <section className="bg-white py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
@@ -79,7 +79,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team */}
+      
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-10">
           <p className="text-yellow-500 font-semibold text-sm uppercase tracking-widest mb-2">The People Behind Us</p>
@@ -98,7 +98,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
+      
       <section className="bg-[#032B5B] py-16 px-4 text-center">
         <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
         <p className="text-white/70 mb-8 max-w-md mx-auto">

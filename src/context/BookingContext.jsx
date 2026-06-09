@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 export const BookingContext = createContext();
 
 export const BookingProvider = ({ children }) => {
-  // Load bookings from localStorage
+
   const [bookings, setBookings] = useState(() => {
     const saved = localStorage.getItem("bookings");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Save to localStorage whenever bookings change
+
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(bookings));
   }, [bookings]);
@@ -29,7 +29,7 @@ export const BookingProvider = ({ children }) => {
     }
 
     const newBooking = {
-      id: Date.now().toString(), // ✅ IMPORTANT FIX
+      id: Date.now().toString(),
       title: booking.title || booking.city || "Untitled Booking",
       destination:
         booking.destination ||
@@ -47,7 +47,7 @@ export const BookingProvider = ({ children }) => {
     toast.success("Booking added successfully!");
   };
 
-  // UPDATE STATUS (USED BY PAYMENT)
+
   const updateBookingStatus = (id, status) => {
     setBookings((prev) =>
       prev.map((booking) =>
