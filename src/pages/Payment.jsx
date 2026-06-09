@@ -1,68 +1,99 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { BookingContext } from "../context/BookingContext";
 
 const Payment = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const handlePayment = () => {
-    alert("Payment Successful!");
+  const { updateBookingStatus } = useContext(BookingContext);
 
-    navigate("/bookings");
+  const [method, setMethod] = useState("card");
+  const [loading, setLoading] = useState(false);
+
+  const handlePayment = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      // Update booking status
+      updateBookingStatus(id, "Confirmed");
+
+      toast.success("Payment Successful 🎉 Booking Confirmed");
+
+      setLoading(false);
+
+      // Redirect after toast
+      setTimeout(() => {
+        navigate("/bookings");
+      }, 1200);
+    }, 1200);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="bg-white w-full max-w-xl p-8 rounded-3xl shadow-lg">
 
-      <div className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-md">
-
-        <h1 className="text-3xl font-bold text-[#032B5B] mb-6">
+        <h1 className="text-3xl font-bold text-[#032B5B] mb-6 text-center">
           Payment
         </h1>
 
-        <input
-          type="text"
-          placeholder="Card Holder Name"
-          className="w-full border rounded-xl p-3 mb-4"
-        />
+        <p className="text-gray-500 text-center mb-6">
+          Choose your preferred payment method
+        </p>
 
-        <input
-          type="text"
-          placeholder="Card Number"
-          className="w-full border rounded-xl p-3 mb-4"
-        />
+        {/* Payment Options */}
+        <div className="space-y-4 mb-8">
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
+          <button
+            onClick={() => setMethod("card")}
+            className={`w-full p-4 border rounded-xl transition ${
+              method === "card"
+                ? "bg-blue-100 border-blue-500"
+                : ""
+            }`}
+          >
+            💳 Card Payment
+          </button>
 
-          <input
-            type="text"
-            placeholder="MM/YY"
-            className="border rounded-xl p-3"
-          />
+          <button
+            onClick={() => setMethod("bank")}
+            className={`w-full p-4 border rounded-xl transition ${
+              method === "bank"
+                ? "bg-blue-100 border-blue-500"
+                : ""
+            }`}
+          >
+            🏦 Bank Transfer
+          </button>
 
-          <input
-            type="text"
-            placeholder="CVV"
-            className="border rounded-xl p-3"
-          />
+          <button
+            onClick={() => setMethod("mobile")}
+            className={`w-full p-4 border rounded-xl transition ${
+              method === "mobile"
+                ? "bg-blue-100 border-blue-500"
+                : ""
+            }`}
+          >
+            📱 Mobile Money
+          </button>
 
         </div>
 
+        {/* Pay Button */}
         <button
           onClick={handlePayment}
-          className="
-            w-full
-            bg-green-500
-            hover:bg-green-600
-            text-white
-            py-3
-            rounded-xl
-            font-semibold
-          "
+          disabled={loading}
+          className={`w-full py-4 rounded-xl text-white font-semibold transition ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700"
+          }`}
         >
-          Pay Now
+          {loading ? "Processing Payment..." : "Pay Now"}
         </button>
 
       </div>
-
     </div>
   );
 };

@@ -6,20 +6,16 @@ export const BookingContext = createContext();
 export const BookingProvider = ({ children }) => {
   // Load bookings from localStorage
   const [bookings, setBookings] = useState(() => {
-    const savedBookings = localStorage.getItem("bookings");
-
-    return savedBookings ? JSON.parse(savedBookings) : [];
+    const saved = localStorage.getItem("bookings");
+    return saved ? JSON.parse(saved) : [];
   });
 
-  // Save bookings whenever they change
+  // Save to localStorage whenever bookings change
   useEffect(() => {
-    localStorage.setItem(
-      "bookings",
-      JSON.stringify(bookings)
-    );
+    localStorage.setItem("bookings", JSON.stringify(bookings));
   }, [bookings]);
 
-  // Add Booking
+  // ADD BOOKING
   const addBooking = (booking) => {
     const exists = bookings.some(
       (item) =>
@@ -33,71 +29,45 @@ export const BookingProvider = ({ children }) => {
     }
 
     const newBooking = {
-      id: Date.now(),
-
-      title:
-        booking.title ||
-        booking.city ||
-        "Untitled Booking",
-
+      id: Date.now().toString(), // ✅ IMPORTANT FIX
+      title: booking.title || booking.city || "Untitled Booking",
       destination:
         booking.destination ||
         booking.country ||
         booking.city ||
         "No Destination",
-
       price: booking.price || "N/A",
-
       image: booking.image || "",
-
-      dateBooked:
-        new Date().toLocaleDateString(),
-
+      dateBooked: new Date().toLocaleDateString(),
       status: "Pending",
     };
 
-    setBookings((prev) => [
-      ...prev,
-      newBooking,
-    ]);
+    setBookings((prev) => [...prev, newBooking]);
 
-    toast.success(
-      "Booking added successfully!"
-    );
+    toast.success("Booking added successfully!");
   };
 
-  // Update Booking Status
-  const updateBookingStatus = (
-    id,
-    status
-  ) => {
+  // UPDATE STATUS (USED BY PAYMENT)
+  const updateBookingStatus = (id, status) => {
     setBookings((prev) =>
       prev.map((booking) =>
         booking.id === id
-          ? {
-              ...booking,
-              status,
-            }
+          ? { ...booking, status }
           : booking
       )
     );
 
     if (status === "Confirmed") {
-      toast.success(
-        "Payment successful!"
-      );
+      toast.success("Payment successful 🎉 Booking Confirmed");
     }
   };
 
-  // Cancel Booking
+  // CANCEL BOOKING
   const cancelBooking = (id) => {
     setBookings((prev) =>
       prev.map((booking) =>
         booking.id === id
-          ? {
-              ...booking,
-              status: "Canceled",
-            }
+          ? { ...booking, status: "Canceled" }
           : booking
       )
     );
@@ -105,29 +75,20 @@ export const BookingProvider = ({ children }) => {
     toast.error("Booking canceled");
   };
 
-  // Remove Single Booking
+  // DELETE SINGLE BOOKING
   const deleteBooking = (id) => {
     setBookings((prev) =>
-      prev.filter(
-        (booking) =>
-          booking.id !== id
-      )
+      prev.filter((booking) => booking.id !== id)
     );
 
     toast.info("Booking removed");
   };
 
-  // Clear All Bookings
+  // CLEAR ALL BOOKINGS
   const clearBookings = () => {
     setBookings([]);
-
-    localStorage.removeItem(
-      "bookings"
-    );
-
-    toast.info(
-      "All bookings cleared"
-    );
+    localStorage.removeItem("bookings");
+    toast.info("All bookings cleared");
   };
 
   return (
