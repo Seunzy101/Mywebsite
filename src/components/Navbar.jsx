@@ -65,12 +65,20 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
 
         {/* LOGO */}
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="Tulip Logo" className="w-10 md:w-12" />
-          <h1 className="text-2xl md:text-3xl font-bold text-[#032B5B]">
+        <NavLink
+          to="/"
+          className="flex items-center gap-3"
+        >
+          <img
+            src={logo}
+            alt="Tulip Logo"
+            className="w-10 md:w-12 cursor-pointer"
+          />
+
+          <h1 className="text-2xl md:text-3xl font-bold text-[#032B5B] cursor-pointer">
             Tulip<span className="text-yellow-500">Hospitality</span>
           </h1>
-        </div>
+        </NavLink>
 
         {/* DESKTOP MENU */}
         <ul className="hidden lg:flex gap-8 font-medium">
