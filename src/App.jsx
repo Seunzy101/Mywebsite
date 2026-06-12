@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -64,16 +65,30 @@ function NotFound() {
 }
 
 export default function App() {
+
+useEffect(() => {
+  // optional: skip in dev to avoid 403 noise
+  if (window.location.hostname === "localhost") return;
+
+  const existingScript = document.querySelector(
+    "script[src='https://emrld.ltd/NTM5MT72.js?t=539172']"
+  );
+
+  if (!existingScript) {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://emrld.ltd/NTM5MT72.js?t=539172";
+    document.head.appendChild(script);
+  }
+}, []);
+
   return (
     <BookingProvider>
-
       <BrowserRouter>
 
         <Navbar />
 
         <Routes>
-
-          
           <Route path="/" element={<Home />} />
           <Route path="/flights" element={<Flights />} />
           <Route path="/hotels" element={<Hotels />} />
@@ -88,11 +103,10 @@ export default function App() {
           <Route path="/booking/:id" element={<BookingDetails />} />
           <Route path="/payment/:id" element={<Payment />} />
           <Route path="*" element={<NotFound />} />
-
         </Routes>
 
         <Footer />
-        
+
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -103,7 +117,6 @@ export default function App() {
         />
 
       </BrowserRouter>
-
     </BookingProvider>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -13,28 +14,55 @@ const SignUp = () => {
     location: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.fullName || !form.email || !form.password) {
-      toast.error("Please fill required fields");
+    if (
+      !form.fullName ||
+      !form.email ||
+      !form.password
+    ) {
+      toast.error("Please fill all required fields");
       return;
     }
 
-    
-    localStorage.setItem("user", JSON.stringify(form));
-    localStorage.setItem("loggedIn", "true");
+    try {
+      setLoading(true);
 
-    
-    window.dispatchEvent(new Event("authChange"));
+      const response = await axios.post(
+        "http://localhost/tulip-backend/api/auth/register.php",
+        {
+          name: form.fullName,
+          email: form.email,
+          password: form.password,
+        }
+      );
 
-    toast.success("Account created successfully 🎉");
+      if (response.data.status === "success") {
+        toast.success(response.data.message);
 
-    navigate("/profile");
+        setTimeout(() => {
+          navigate("/signin");
+        }, 1500);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Server error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,12 +73,16 @@ const SignUp = () => {
           Create Account
         </h1>
 
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={handleSubmit}
+        >
 
           <input
             name="fullName"
             placeholder="Full Name"
             className="border p-4 rounded-xl"
+            value={form.fullName}
             onChange={handleChange}
           />
 
@@ -59,6 +91,7 @@ const SignUp = () => {
             type="email"
             placeholder="Email"
             className="border p-4 rounded-xl"
+            value={form.email}
             onChange={handleChange}
           />
 
@@ -66,6 +99,7 @@ const SignUp = () => {
             name="phone"
             placeholder="Phone Number"
             className="border p-4 rounded-xl"
+            value={form.phone}
             onChange={handleChange}
           />
 
@@ -73,6 +107,7 @@ const SignUp = () => {
             name="location"
             placeholder="Location"
             className="border p-4 rounded-xl"
+            value={form.location}
             onChange={handleChange}
           />
 
@@ -81,17 +116,27 @@ const SignUp = () => {
             type="password"
             placeholder="Password"
             className="border p-4 rounded-xl"
+            value={form.password}
             onChange={handleChange}
           />
 
-          <button className="bg-[#032B5B] text-white py-4 rounded-xl hover:bg-yellow-500">
-            Create Account
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-[#032B5B] text-white py-4 rounded-xl hover:bg-yellow-500"
+          >
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
+
         </form>
 
         <div className="text-center mt-6">
           <p>Already have an account?</p>
-          <Link to="/signin" className="text-[#032B5B] font-bold">
+
+          <Link
+            to="/signin"
+            className="text-[#032B5B] font-bold"
+          >
             Sign In
           </Link>
         </div>
