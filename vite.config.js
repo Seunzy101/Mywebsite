@@ -7,4 +7,13 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    proxy: {
+      '/api/tp': {
+        target: 'https://api.travelpayouts.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/tp/, ''),
+      },
+    },
+  },
 })
