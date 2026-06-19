@@ -51,8 +51,6 @@ const Tours = () => {
     setSelectedTour(tour);
     setOpen(true);
   };
-
-  // ✅ FIXED VERSION (STANDARDIZED DATA)
   const handleSubmit = (formData) => {
     if (!selectedTour) return;
 
@@ -63,20 +61,21 @@ const Tours = () => {
       image: selectedTour.image,
       days: selectedTour.days,
 
-      // client info (IMPORTANT FIX)
       fullName: formData.fullName,
       email: formData.email,
       phone: formData.phone,
       guests: formData.guests,
-      departureDate: formData.departureDate,
-      returnDate: formData.returnDate,
+
+      departureDate: formData.tourDate,
+      returnDate: "",
+
+      bookingType: "tour",
     });
 
     setOpen(false);
     setSelectedTour(null);
     navigate("/bookings");
   };
-
   return (
     <section className="bg-gray-50 min-h-screen">
 
@@ -179,6 +178,7 @@ const Tours = () => {
         onClose={() => setOpen(false)}
         onSubmit={handleSubmit}
         item={selectedTour}
+        bookingType="tour"
       />
 
     </section>

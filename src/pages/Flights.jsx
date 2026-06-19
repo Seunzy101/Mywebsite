@@ -1,6 +1,5 @@
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookingContext } from "../context/BookingContext";
 import BookingModal from "../components/BookingModal";
 import { FaSearch, FaTimes, FaPlane } from "react-icons/fa";
 import { getCheapFlights } from "../api/travelpayouts";
@@ -176,8 +175,8 @@ const Flights = () => {
       const origins = isDefault
         ? ["LOS", "ABV", "PHC"]
         : [origin, "LOS", "ABV", "PHC"].filter(
-            (o, i, arr) => arr.indexOf(o) === i
-          );
+          (o, i, arr) => arr.indexOf(o) === i
+        );
 
       const results = await Promise.all(
         origins.map((o) =>
@@ -235,39 +234,55 @@ const Flights = () => {
   };
 
   const handleSubmit = async (clientData) => {
-  try {
-    const user = JSON.parse(localStorage.getItem("user"));
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!user) {
-      toast.error("Please login first");
-      return;
-    }
-
-    const response = await axios.post(
-      "http://localhost/tulip-backend/api/bookings/create.php",
-      {
-        user_id: user.id,
-        title: selectedFlight.title,
-        destination: selectedFlight.toName,
-        price: selectedFlight.rawPrice,
+      if (!user) {
+        toast.error("Please login first");
+        return;
       }
-    );
 
-    if (response.data.status === "success") {
-      toast.success("Booking created successfully");
+      const response = await axios.post(
+        "http://localhost/tulip-backend/api/bookings/create.php",
+        {
+          user_id: user.id,
 
-      setOpen(false);
-      setSelectedFlight(null);
+          title: selectedFlight.title,
+          destination: selectedFlight.toName,
+          price: selectedFlight.rawPrice,
 
-      navigate("/bookings");
-    } else {
-      toast.error(response.data.message);
+          full_name: clientData.fullName,
+          email: clientData.email,
+          phone: clientData.phone,
+
+          guests: selectedFlight.passengers,
+          departure_date: clientData.departureDate,
+
+          return_date:
+            tripType === "Round Trip"
+              ? clientData.returnDate
+              : null,
+
+          image: selectedFlight.image,
+          cabin_class: selectedFlight.cabinClass,
+        }
+      );
+
+      if (response.data.status === "success") {
+        toast.success("Booking created successfully");
+
+        setOpen(false);
+        setSelectedFlight(null);
+
+        navigate("/bookings");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Booking failed");
     }
-  } catch (error) {
-    console.error(error);
-    toast.error("Booking failed");
-  }
-};
+  };
 
   const updateLeg = (index, field, value) => {
     const updated = [...legs];
@@ -325,11 +340,10 @@ const Flights = () => {
               <button
                 key={type}
                 onClick={() => setTripType(type)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold border transition ${
-                  tripType === type
-                    ? "bg-[#032B5B] text-white border-[#032B5B]"
-                    : "bg-white text-gray-600 border-gray-300"
-                }`}
+                className={`px-5 py-2 rounded-full text-sm font-semibold border transition ${tripType === type
+                  ? "bg-[#032B5B] text-white border-[#032B5B]"
+                  : "bg-white text-gray-600 border-gray-300"
+                  }`}
               >
                 {type}
               </button>
@@ -653,12 +667,13 @@ const Flights = () => {
           </div>
         </div>
       )}
-
       <BookingModal
         isOpen={open}
         onClose={() => setOpen(false)}
         onSubmit={handleSubmit}
         item={selectedFlight}
+        bookingType="flight"
+        tripType={tripType}
       />
     </section>
   );

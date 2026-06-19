@@ -58,27 +58,29 @@ const Hotels = () => {
   };
 
   const handleSubmit = (clientData) => {
-    if (!selectedHotel) return;
+  if (!selectedHotel) return;
 
-    addBooking({
-      title: selectedHotel.title,
-      destination: selectedHotel.destination,
-      price: selectedHotel.price,
-      image: selectedHotel.image,
+  addBooking({
+    title: selectedHotel.title,
+    destination: selectedHotel.destination,
+    price: selectedHotel.price,
+    image: selectedHotel.image,
 
-      // ✅ IMPORTANT FIX (matches BookingContext + BookingDetails)
-      fullName: clientData.fullName,
-      email: clientData.email,
-      phone: clientData.phone,
-      guests: clientData.guests,
-      departureDate: clientData.departureDate,
-      returnDate: clientData.returnDate,
-    });
+    fullName: clientData.fullName,
+    email: clientData.email,
+    phone: clientData.phone,
+    guests: clientData.guests,
 
-    setOpen(false);
-    setSelectedHotel(null);
-    navigate("/bookings");
-  };
+    departureDate: clientData.checkInDate,
+    returnDate: clientData.checkOutDate,
+
+    bookingType: "hotel",
+  });
+
+  setOpen(false);
+  setSelectedHotel(null);
+  navigate("/bookings");
+};
 
   return (
     <section className="bg-gray-50 min-h-screen">
@@ -205,6 +207,7 @@ const Hotels = () => {
         onClose={() => setOpen(false)}
         onSubmit={handleSubmit}
         item={selectedHotel}
+        bookingType="hotel"
       />
 
     </section>
